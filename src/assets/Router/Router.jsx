@@ -1,6 +1,9 @@
 
 
 import Homepage from "../../Home/Homepage";
+import Registation from "../../Home/Registation";
+
+import Team from "../../Home/Team";
 import Root from "../../Root";
 import {
     createBrowserRouter,
@@ -14,6 +17,14 @@ const router = createBrowserRouter([
             {
                 path: "/",
                 element: <Homepage></Homepage>
+            },
+            {
+                path: "/team",
+                element: <Team></Team>
+            },
+            {
+                path: "/signup",
+                element: <Registation></Registation>
             }
         ]
     },
