@@ -6,10 +6,12 @@ import ProductCard from "./ProductCard";
 const AllProducts = () => {
 
     const [products, setproducts] = useState([])
+    const [search, setSearch] = useState('')
+    const [sortOrder, setSortOrder] = useState('asc');
 
     useEffect(() => {
 
-        fetch('https://online-market-server-rosy.vercel.app/products')
+        fetch(`http://localhost:3000/products?search=${search}&sortOrder=${sortOrder}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -18,7 +20,17 @@ const AllProducts = () => {
 
 
             });
-    }, []);
+    }, [search]);
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        const text = e.target.search.value;
+        setSearch(text);
+    };
+
+    const handleSortOrderChange = (e) => {
+        setSortOrder(e.target.value);
+    };
 
 
     return (
@@ -29,7 +41,7 @@ const AllProducts = () => {
                 <div className='flex flex-col md:flex-row justify-center items-center gap-5 '>
 
 
-                    <form>
+                    <form onSubmit={handleSearch}>
                         <div className='flex p-1 overflow-hidden border rounded-lg    focus-within:ring focus-within:ring-opacity-40 focus-within:border-blue-400 focus-within:ring-blue-300'>
                             <input
                                 className='px-6 py-2 text-gray-700 placeholder-gray-500 bg-white outline-none focus:placeholder-transparent'
@@ -49,6 +61,8 @@ const AllProducts = () => {
                             name='category'
                             id='category'
                             className='border p-4 rounded-md'
+                            value={sortOrder}
+                            onChange={handleSortOrderChange}
                         >
 
                             <option value=''>Sort By </option>
