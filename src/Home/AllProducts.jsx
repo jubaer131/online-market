@@ -7,20 +7,34 @@ const AllProducts = () => {
 
     const [products, setproducts] = useState([])
     const [search, setSearch] = useState('')
-    const [sortOrder, setSortOrder] = useState('asc');
+    const [sortOrder, setSortOrder] = useState('')
+    const [itemsPerPage, setItemsPerPage] = useState(5);
+    const [count, setCount] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1);
+
+
+    const numberOfPages = Math.ceil(count / itemsPerPage);
+    const pages = [...Array(numberOfPages).keys()].map(item => item + 1);
+
 
     useEffect(() => {
 
-        fetch(`http://localhost:3000/products?search=${search}&sortOrder=${sortOrder}`)
+        fetch(`http://localhost:3000/products?search=${search}&sortOrder=${sortOrder}&page=${currentPage}&size=${itemsPerPage}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 setproducts(data)
 
-
-
             });
-    }, [search]);
+    }, [search, sortOrder, currentPage, itemsPerPage]);
+
+    useEffect(() => {
+        fetch('http://localhost:3000/paginationcount')
+            .then(res => res.json())
+            .then(data => {
+                setCount(data.count);
+            });
+    }, []);
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -30,6 +44,30 @@ const AllProducts = () => {
 
     const handleSortOrderChange = (e) => {
         setSortOrder(e.target.value);
+    };
+
+
+    // pagination from here 
+    const handleBtn = value => {
+        setCurrentPage(value);
+
+    };
+
+    const handlePagination = value => {
+        setCurrentPage(value);
+
+    };
+
+    const handleNext = () => {
+        if (currentPage < numberOfPages) {
+            handlePagination(currentPage + 1);
+        }
+    };
+
+    const handlePrevious = () => {
+        if (currentPage > 1) {
+            handlePagination(currentPage - 1);
+        }
     };
 
 
@@ -65,9 +103,10 @@ const AllProducts = () => {
                             onChange={handleSortOrderChange}
                         >
 
-                            <option value=''>Sort By </option>
-                            <option value='dsc'>Descending Order</option>
-                            <option value='asc'>Ascending Order</option>
+                            <option value=''>Sort By</option>
+                            <option value='price-asc'>Price: Low to High</option>
+                            <option value='price-desc'>Price: High to Low</option>
+                            <option value='date-desc'>Date Added: Newest First</option>
                         </select>
                     </div>
 
@@ -80,7 +119,8 @@ const AllProducts = () => {
             </div>
 
             <div className='flex justify-center mt-12'>
-                <button className='px-4 py-2 mx-1 text-gray-700 disabled:text-gray-500 capitalize bg-gray-200 rounded-md disabled:cursor-not-allowed disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:bg-blue-500  hover:text-white'>
+                <button disabled={currentPage === 1}
+                    onClick={handlePrevious} className='px-4 py-2 mx-1 text-gray-700 disabled:text-gray-500 capitalize bg-gray-200 rounded-md disabled:cursor-not-allowed disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:bg-blue-500  hover:text-white'>
                     <div className='flex items-center -mx-1'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
@@ -101,16 +141,18 @@ const AllProducts = () => {
                     </div>
                 </button>
 
-                {/* {pages.map(btnNum => (
+                {pages.map(btnNum => (
                     <button
+                        onClick={() => handleBtn(btnNum)}
                         key={btnNum}
-                        className={`hidden px-4 py-2 mx-1 transition-colors duration-300 transform  rounded-md sm:inline hover:bg-blue-500  hover:text-white`}
-                    >
+                        className={` ${currentPage === btnNum ? 'bg-lime-500 text-gray-900' : 'bg-white text-gray-900'} px-4 py-2 mx-1 transition-colors duration-300 transform rounded-md sm:inline hover:bg-lime-700 hover:text-white`}>
                         {btnNum}
                     </button>
-                ))} */}
+                ))}
 
-                <button className='px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-gray-200 rounded-md hover:bg-blue-500 disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:text-white disabled:cursor-not-allowed disabled:text-gray-500'>
+                <button
+                    disabled={currentPage === numberOfPages}
+                    onClick={handleNext} className='px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-gray-200 rounded-md hover:bg-blue-500 disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:text-white disabled:cursor-not-allowed disabled:text-gray-500'>
                     <div className='flex items-center -mx-1'>
                         <span className='mx-1'>Next</span>
 
