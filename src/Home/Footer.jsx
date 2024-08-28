@@ -23,10 +23,10 @@ const Footer = () => {
                                 <Link to='/'>Home</Link>
                             </li>
                             <li>
-                                <Link to='/dashboard'></Link>
+                                <Link to='/registation'>Registration</Link>
                             </li>
                             <li>
-                                <Link to='/availablecamp'></Link>
+                                <Link to='/login'>Login</Link>
                             </li>
 
                         </ul>
@@ -35,10 +35,10 @@ const Footer = () => {
                         <h3 className="tracking-wide uppercase dark:text-gray-900">Join Us</h3>
                         <ul className="space-y-1">
                             <li>
-                                <Link to='login'> </Link>
+                                <Link to='team'>Meet our team </Link>
                             </li>
                             <li>
-                                <Link to='/signup'>Sign Up </Link>
+                                <Link to='/'></Link>
                             </li>
                         </ul>
                     </div>
