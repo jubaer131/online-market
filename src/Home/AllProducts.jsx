@@ -8,7 +8,7 @@ const AllProducts = () => {
     const [products, setproducts] = useState([])
     const [search, setSearch] = useState('')
     const [sortOrder, setSortOrder] = useState('')
-    const [itemsPerPage, setItemsPerPage] = useState(5);
+    const [itemsPerPage, setItemsPerPage] = useState(8);
     const [count, setCount] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -34,7 +34,7 @@ const AllProducts = () => {
             .then(data => {
                 setCount(data.count);
             });
-    }, []);
+    }, [count, currentPage, pages]);
 
     const handleSearch = (e) => {
         e.preventDefault();
