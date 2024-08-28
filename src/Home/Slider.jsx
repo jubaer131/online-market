@@ -35,11 +35,11 @@ export default function Slider() {
                     >
                         <div className='flex items-center justify-center w-full h-full'>
                             <div className='text-center'>
-                                <h1 className='text-sm font-semibold text-white lg:text-2xl'>
-
+                                <h1 className='text-sm font-semibold text-white lg:text-4xl'>
+                                    Welcome to online market
                                 </h1>
-                                <br />
 
+                                <p className='text-sm font-semibold text-white lg:text-xl'>your one-stop destination for a seamless shopping experience.  <br />Here, you can explore a wide range of products from the comfort of your home</p>
                             </div>
                         </div>
                     </div>
@@ -53,10 +53,10 @@ export default function Slider() {
                     >
                         <div className='flex items-center justify-center w-full h-full '>
                             <div className='text-center'>
-                                <h1 className='text-sm font-semibold text-white lg:text-2xl'>
-
+                                <h1 className='text-sm font-semibold text-white lg:text-4xl'>
+                                    Welcome to online market
                                 </h1>
-                                <br />
+                                <p className='text-sm font-semibold text-white lg:text-xl'>your one-stop destination for a seamless shopping experience.  <br />Here, you can explore a wide range of products from the comfort of your home</p>
 
                             </div>
                         </div>
@@ -71,10 +71,10 @@ export default function Slider() {
                     >
                         <div className='flex items-center justify-center w-full h-full max-sm:h-[200px]'>
                             <div className='text-center'>
-                                <h1 className='text-sm font-semibold text-white lg:text-2xl'>
-
+                                <h1 className='text-sm font-semibold text-white lg:text-4xl'>
+                                    Welcome to online market
                                 </h1>
-                                <br />
+                                <p className='text-sm font-semibold text-white lg:text-xl'>your one-stop destination for a seamless shopping experience.  <br />Here, you can explore a wide range of products from the comfort of your home</p>
 
                             </div>
                         </div>
