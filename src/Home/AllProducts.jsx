@@ -98,7 +98,7 @@ const AllProducts = () => {
                         <select
                             name='category'
                             id='category'
-                            className='border p-4 rounded-md'
+                            className='border p-4 rounded-md '
                             value={sortOrder}
                             onChange={handleSortOrderChange}
                         >
