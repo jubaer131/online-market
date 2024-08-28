@@ -19,7 +19,7 @@ const AllProducts = () => {
 
     useEffect(() => {
 
-        fetch(`http://localhost:3000/products?search=${search}&sortOrder=${sortOrder}&page=${currentPage}&size=${itemsPerPage}`)
+        fetch(`https://online-market-server-rosy.vercel.app/products?search=${search}&sortOrder=${sortOrder}&page=${currentPage}&size=${itemsPerPage}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -29,7 +29,7 @@ const AllProducts = () => {
     }, [search, sortOrder, currentPage, itemsPerPage]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/paginationcount')
+        fetch('https://online-market-server-rosy.vercel.app/paginationcount')
             .then(res => res.json())
             .then(data => {
                 setCount(data.count);
