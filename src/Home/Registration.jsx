@@ -1,10 +1,81 @@
-import { Link } from "react-router-dom";
+
+import { useContext } from "react"
+import { Link, useLocation, useNavigate, } from "react-router-dom"
+import { toast } from "react-toastify"
+import { AuthContext } from "../assets/Provider/AuthProvider"
+import { Helmet } from "react-helmet"
 
 
-const Registation = () => {
+
+const Registration = () => {
+
+    const { user,
+        setUser,
+        createUser,
+        updateUserProfile, } = useContext(AuthContext)
+
+    const navigate = useNavigate()
+    const location = useLocation()
+    const form = location.state || '/'
+
+
+    const handleregistation = async (e) => {
+        e.preventDefault()
+        const form = e.target
+        const email = form.email.value
+        const name = form.name.value
+        const photo = form.photo.value
+        const password = form.password.value
+        if (password.length < 8) {
+            toast.error("Password must be at least 8 characters long.");
+            return
+        }
+
+
+        if (!/[A-Z]/.test(password)) {
+            toast.error("Password must contain at least one uppercase letter.");
+            return
+        }
+
+
+        if (!/[a-z]/.test(password)) {
+            toast.error("Password must contain at least one lowercase letter.");
+            return
+        }
+
+
+        if (!/\d/.test(password)) {
+            toast.error("Password must contain at least one digit.");
+            return
+        }
+
+
+        if (!/[^a-zA-Z0-9]/.test(password)) {
+            toast.error("Password must contain at least one special character.");
+            return
+        }
+        console.log({ email, password })
+        try {
+            const result = await createUser(email, password)
+            console.log(result)
+            await updateUserProfile(name, photo)
+            setUser({ ...user, photoURL: photo, displayName: name })
+            toast.success('Registaton successful')
+            navigate(form, { replace: true })
+        } catch (err) {
+            console.log(err)
+            toast.error(err?.message)
+        }
+
+
+    }
+
+
     return (
         <div className='flex justify-center items-center min-h-[calc(100vh-306px)]'>
-
+            <Helmet>
+                <title>Registation</title>
+            </Helmet>
             <div className='flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl '>
                 <div className='w-full px-6 py-8 md:px-8 lg:w-1/2'>
                     <div className='flex justify-center mx-auto'>
@@ -30,7 +101,7 @@ const Registation = () => {
 
                         <span className='w-1/5 border-b dark:border-gray-400 lg:w-1/4'></span>
                     </div>
-                    <form >
+                    <form onSubmit={handleregistation}>
                         <div className='mt-4'>
                             <label
                                 className='block mb-2 text-sm font-medium text-gray-600 '
@@ -121,12 +192,12 @@ const Registation = () => {
                 <div
                     className='hidden bg-cover bg-center lg:block lg:w-1/2'
                     style={{
-                        backgroundImage: `url('https://i.ibb.co/qxJVxW5/discount-dslr-camera-podium.jpg')`,
+                        backgroundImage: `url('https://i.ibb.co/SnZv88t/frames-for-your-heart-m-R1-CIDdu-GLc-unsplash.jpg')`,
                     }}
                 ></div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default Registation;
+export default Registration

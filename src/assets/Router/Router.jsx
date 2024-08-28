@@ -1,8 +1,8 @@
 
 
 import Homepage from "../../Home/Homepage";
-import Registation from "../../Home/Registation";
-
+import Login from "../../Home/Login";
+import Registration from "../../Home/Registration";
 import Team from "../../Home/Team";
 import Root from "../../Root";
 import {
@@ -23,8 +23,12 @@ const router = createBrowserRouter([
                 element: <Team></Team>
             },
             {
-                path: "/signup",
-                element: <Registation></Registation>
+                path: "/registation",
+                element: <Registration></Registration>
+            },
+            {
+                path: "/login",
+                element: <Login></Login>
             }
         ]
     },

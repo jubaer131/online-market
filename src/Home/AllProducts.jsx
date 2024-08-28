@@ -72,7 +72,7 @@ const AllProducts = () => {
 
 
     return (
-        <div className='container px-6 py-10 mx-auto min-h-[calc(100vh-306px)] flex flex-col justify-between'>
+        <div className='container px-6 py-10 mx-auto  flex flex-col justify-between'>
 
             <h1 className="text-4xl text-center font-semibold my-8">All products</h1>
             <div>
@@ -118,9 +118,9 @@ const AllProducts = () => {
                 </div>
             </div>
 
-            <div className='flex justify-center mt-12'>
+            <div className='flex justify-center mt-12 '>
                 <button disabled={currentPage === 1}
-                    onClick={handlePrevious} className='px-4 py-2 mx-1 text-gray-700 disabled:text-gray-500 capitalize bg-gray-200 rounded-md disabled:cursor-not-allowed disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:bg-blue-500  hover:text-white'>
+                    onClick={handlePrevious} className='max-sm:hidden px-4 py-2 mx-1 text-gray-700 disabled:text-gray-500 capitalize bg-gray-200 rounded-md disabled:cursor-not-allowed disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:bg-orange-500  hover:text-white'>
                     <div className='flex items-center -mx-1'>
                         <svg
                             xmlns='http://www.w3.org/2000/svg'
@@ -145,14 +145,15 @@ const AllProducts = () => {
                     <button
                         onClick={() => handleBtn(btnNum)}
                         key={btnNum}
-                        className={` ${currentPage === btnNum ? 'bg-lime-500 text-gray-900' : 'bg-white text-gray-900'} px-4 py-2 mx-1 transition-colors duration-300 transform rounded-md sm:inline hover:bg-lime-700 hover:text-white`}>
+                        className={` ${currentPage === btnNum ? 'bg-orange-400 text-gray-900' : 'bg-white text-gray-900'} px-4 py-2 mx-1 transition-colors duration-300 transform rounded-md sm:inline hover:bg-orange-700 hover:text-white`}>
                         {btnNum}
                     </button>
                 ))}
 
                 <button
                     disabled={currentPage === numberOfPages}
-                    onClick={handleNext} className='px-4 py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-gray-200 rounded-md hover:bg-blue-500 disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:text-white disabled:cursor-not-allowed disabled:text-gray-500'>
+                    onClick={handleNext}
+                    className='max-sm:hidden px-3 py-2 sm:px-4 sm:py-2 mx-1 text-gray-700 transition-colors duration-300 transform bg-gray-200 rounded-md hover:bg-orange-500 disabled:hover:bg-gray-200 disabled:hover:text-gray-500 hover:text-white disabled:cursor-not-allowed disabled:text-gray-500'>
                     <div className='flex items-center -mx-1'>
                         <span className='mx-1'>Next</span>
 
